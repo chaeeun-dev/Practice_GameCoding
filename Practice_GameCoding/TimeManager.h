@@ -15,7 +15,7 @@ public:
 private:
 	uint64 _frequency = 0;
 	uint64 _prevCount = 0;
-	float deltaTime = 0.f;
+	float _deltaTime = 0.f;
 
 private:
 	uint32 _frameCount = 0;
