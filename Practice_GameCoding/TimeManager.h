@@ -10,7 +10,7 @@ public:
 	void Update();
 
 	uint32 GetFps() { return _fps; }
-	float GetDeltaTime() { return deltaTime; }
+	float GetDeltaTime() { return _deltaTime; }
 
 private:
 	uint64 _frequency = 0;

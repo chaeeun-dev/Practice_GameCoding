@@ -11,5 +11,5 @@ public:									\
 		return &s_instance;				\
 	}			
 
-#define GET_SINGLE(classname) classname::GetInstance();		// 教臂沛 积己
+#define GET_SINGLE(classname) classname::GetInstance()		// 教臂沛 积己
 				
