@@ -42,6 +42,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     Game game;
     game.Init(g_hwnd);
 
+    uint64 prevTick = 0;
+
     // 기본 메시지 루프입니다:
     while (msg.message != WM_QUIT)      // 창 끄면 바로 프로그램 종료되도록
     {
@@ -53,9 +55,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
-            // 게임 로직
-            game.Update();
-            game.Render();
+            uint64 now = ::GetTickCount64();    // 현재 시간
+
+            if (now - prevTick >= 10)
+            {
+                // 게임 로직
+                game.Update();
+                game.Render();
+            
+                prevTick = now;
+            }
         }
     }
 
@@ -158,9 +167,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
 
             // 마우스 위치 그리는 코드
-            WCHAR buffer[100];
-            ::wsprintf(buffer, L"(%d,%d)", mousePosX, mousePosY);      // 포맷 지정해 마우스 위치 넣음
-            ::TextOut(hdc, 100, 100, buffer, ::wcslen(buffer));
+            //WCHAR buffer[100];
+            //::wsprintf(buffer, L"(%d,%d)", mousePosX, mousePosY);      // 포맷 지정해 마우스 위치 넣음
+            //::TextOut(hdc, 100, 100, buffer, ::wcslen(buffer));
             EndPaint(hWnd, &ps);
         }
         break;
