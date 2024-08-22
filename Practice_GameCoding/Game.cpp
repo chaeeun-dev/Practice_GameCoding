@@ -33,7 +33,7 @@ void Game::Init(HWND hwnd)
 	GET_SINGLE(InputManager)->Init(hwnd);
 	GET_SINGLE(SceneManager)->Init();
 
-	GET_SINGLE(SceneManager)->ChangeScene(SceneType::DevScene);		// 첫 Scene 설정
+	GET_SINGLE(SceneManager)->ChangeScene(SceneType::GameScene);		// 첫 Scene 설정
 }
 
 void Game::Update()

@@ -53,5 +53,5 @@ void Player::Update()
 
 void Player::Render(HDC hdc)
 {
-	Utils::DrawCircle(hdc, _pos, 50)
+	Utils::DrawCircle(hdc, _pos, 50);
 }
