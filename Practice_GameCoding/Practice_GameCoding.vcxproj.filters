@@ -81,6 +81,9 @@
     <ClInclude Include="GameScene.h">
       <Filter>소스 파일\02.Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>소스 파일\03.Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Practice_GameCoding.rc">
@@ -125,6 +128,9 @@
     </ClCompile>
     <ClCompile Include="GameScene.cpp">
       <Filter>소스 파일\02.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>소스 파일\03.Objects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
