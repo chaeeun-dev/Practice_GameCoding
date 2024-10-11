@@ -5,7 +5,7 @@ void TimeManager::Init()
 {
 	// 시간 초를 가져오는 함수
 	
-	// _frequency는 CPU 클럭의 빈도(주파수)를 나타내며, 이를 이요해 경과된 시간을 계산할 수 있음
+	// _frequency는 CPU 클럭의 빈도(주파수)를 나타내며, 이를 이용해 경과된 시간을 계산할 수 있음
 	::QueryPerformanceFrequency(reinterpret_cast<LARGE_INTEGER*>(&_frequency));
 	
 	// _prevCount는 코드가 마지막으로 시간 측정을 한 시점을 기억하는 변수로 사용

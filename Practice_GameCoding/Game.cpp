@@ -50,7 +50,7 @@ void Game::Render()
 	
 	{
 		POINT mousePos = GET_SINGLE(InputManager)->GetMousePos();
-		wstring str = std::format(L"Mouse X({0}), Y({1})", mousePos.x, mousePos.y);
+		wstring str = std::format(L"Mouse x_pos({0}), y_pos({1})", mousePos.x, mousePos.y);
 		::TextOut(_hdcBack, 20, 10, str.c_str(), static_cast<int32>(str.size()));
 	}
 	

@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Utils.h"
 
+// static_cast를 사용한 이유? x, y 좌표를 float로 작성해서 
+
 void Utils::DrawText(HDC hdc, Pos pos, const wstring& str)
 {
 	::TextOut(hdc, static_cast<int32>(pos.x), static_cast<int32>(pos.y), str.c_str(), static_cast<int32>(str.size()));
@@ -22,4 +24,3 @@ void Utils::DrawLine(HDC hdc, Pos from, Pos to)
 	::LineTo(hdc, static_cast<int32>(to.x), static_cast<int32>(to.y));
 }
 
-// static_cast를 사용한 이유? x, y 좌표를 float로 작성해서 
