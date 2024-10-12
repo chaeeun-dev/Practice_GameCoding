@@ -6,7 +6,7 @@
 
 Game::Game()
 {
-	int* p = new int();
+	// int* p = new int();	// memory leak 확인하기 위해
 }
 
 Game::~Game()
@@ -65,3 +65,5 @@ void Game::Render()
 	::BitBlt(_hdc, 0, 0, _rect.right, _rect.bottom, _hdcBack, 0, 0, SRCCOPY);	// 비트블릿 - 고속 복사
 	::PatBlt(_hdcBack, 0, 0, _rect.right, _rect.bottom, WHITENESS);		// 다시 백버퍼 리셋
 }
+
+// 더블 버퍼링 - _hdcBack에 먼저 그림을 다 그린 후, _hdc로 그림을 복사해준다. 잔상과 깜빡거리는 현상이 사라진다! 
