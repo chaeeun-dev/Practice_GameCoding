@@ -96,6 +96,9 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>소스 파일\01.Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Values.h">
+      <Filter>소스 파일\99.Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Practice_GameCoding.rc">
