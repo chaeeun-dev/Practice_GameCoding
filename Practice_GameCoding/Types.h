@@ -115,5 +115,3 @@ struct Vector
 	float x = 0;
 	float y = 0;
 };
-
-using Pos = Vector;

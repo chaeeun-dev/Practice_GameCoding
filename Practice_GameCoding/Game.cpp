@@ -3,6 +3,7 @@
 #include "TimeManager.h"
 #include "InputManager.h"
 #include "SceneManager.h"
+#include "ResourceManager.h"
 
 Game::Game()
 {
@@ -32,6 +33,7 @@ void Game::Init(HWND hwnd)
 	GET_SINGLE(TimeManager)->Init();
 	GET_SINGLE(InputManager)->Init(hwnd);
 	GET_SINGLE(SceneManager)->Init();
+	GET_SINGLE(ResourceManager)->Init(hwnd, std::filesystem::path(L"C:\\Users\\admin\\source\\repos\\chaeeun-dev\\Practice_GameCoding\\Resources"));
 
 	GET_SINGLE(SceneManager)->ChangeScene(SceneType::GameScene);		// Ã¹ Scene ¼³Á¤
 }
