@@ -31,6 +31,9 @@
     <Filter Include="소스 파일\99.Headers\Andromeda">
       <UniqueIdentifier>{597d9e1a-10c3-4bed-b158-70c499e9770a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\04.Resources">
+      <UniqueIdentifier>{4d5ca8d9-d7c2-4206-8187-1dfe035a82fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -100,7 +103,13 @@
       <Filter>소스 파일\99.Headers</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>소스 파일\01.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceBase.h">
+      <Filter>소스 파일\04.Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>소스 파일\04.Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -163,7 +172,13 @@
       <Filter>소스 파일\01.Manager</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\01.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceBase.cpp">
+      <Filter>소스 파일\04.Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>소스 파일\04.Resources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

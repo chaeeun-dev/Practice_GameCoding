@@ -115,3 +115,78 @@ struct Vector
 	float x = 0;
 	float y = 0;
 };
+
+// int 버전의 Vector 자료형
+struct VectorInt
+{
+	VectorInt() {}
+	VectorInt(int32 x, int32 y) : x(x), y(y) {}
+	VectorInt(POINT pt) : x(pt.x), y(pt.y) { }
+
+	VectorInt operator+(const VectorInt& other)
+	{
+		VectorInt ret;
+		ret.x = x + other.x;
+		ret.y = y + other.y;
+		return ret;
+	}
+
+	VectorInt operator-(const VectorInt& other)
+	{
+		VectorInt ret;
+		ret.x = x - other.x;
+		ret.y = y - other.y;
+		return ret;
+	}
+
+	VectorInt operator*(int32 value)
+	{
+		VectorInt ret;
+		ret.x = x * value;
+		ret.y = y * value;
+		return ret;
+	}
+
+	void operator+=(const VectorInt& other)
+	{
+		x += other.x;
+		y += other.y;
+	}
+
+	void operator-=(const VectorInt& other)
+	{
+		x -= other.x;
+		y -= other.y;
+	}
+
+	int32 LengthSquared()
+	{
+		return x * x + y * y;
+	}
+
+	float Length()
+	{
+		return (float)::sqrt(LengthSquared());
+	}
+
+	int32 Dot(VectorInt other)		// 내적
+	{
+		return x * other.x + y * other.y;
+	}
+
+	int32 Cross(VectorInt other)	// 외적
+	{
+		return x * other.y - y * other.x;
+	}
+
+	int32 x = 0;
+	int32 y = 0;
+};
+
+
+using Pos = Vector;
+
+// vector 자료형과 헷갈리기 때문에 Vec2로 바꿈
+using Vec2 = Vector;
+using Vec2Int = VectorInt;
+
