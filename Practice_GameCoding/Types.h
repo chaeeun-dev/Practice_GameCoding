@@ -184,7 +184,7 @@ struct VectorInt
 };
 
 
-using Pos = Vector;
+// using Pos = Vector;
 
 // vector 자료형과 헷갈리기 때문에 Vec2로 바꿈
 using Vec2 = Vector;

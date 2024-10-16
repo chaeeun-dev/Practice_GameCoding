@@ -8,8 +8,11 @@ public:
 	virtual ~Texture();
 
 public:
-	Texture* LoadBmp(HWND hwnd, const wstring& path);
+	Texture* LoadBmp(HWND hwnd, const wstring& path);	// 이미지 파일 로드 함수
 	HDC GetDC();
+
+	void SetTransparent(uint32 transparent) { _transparent = transparent; }
+	uint32 GetTransparent() { return _transparent; }
 
 private:
 	HDC _hdc = {};

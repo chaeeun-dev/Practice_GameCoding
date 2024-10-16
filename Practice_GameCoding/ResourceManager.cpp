@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "ResourceManager.h"
+#include "Texture.h"
 
 ResourceManager::~ResourceManager()
 {
@@ -19,4 +20,24 @@ void ResourceManager::Init(HWND hwnd, std::filesystem::path resourcePath)
 
 void ResourceManager::Clear()
 {
+	// 지울 땐 스마트 포인터 사용
+	for (auto& item : _textures)
+		SAFE_DELETE(item.second);
+
+	_textures.clear();
+}
+
+Texture* ResourceManager::LoadTexture(const wstring& key, const wstring& path, uint32 transparent)
+{
+	if (_textures.find(key) != _textures.end())
+		return _textures[key];
+
+	fs::path fullPath = _resourcePath / path;
+
+	Texture* texture = new Texture();
+	texture->LoadBmp(_hwnd, fullPath.c_str());
+	texture->SetTransparent(transparent);
+	_textures[key] = texture;
+
+	return texture;
 }

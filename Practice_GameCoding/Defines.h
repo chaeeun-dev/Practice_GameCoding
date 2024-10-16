@@ -14,8 +14,8 @@ public:									\
 #define GET_SINGLE(classname) classname::GetInstance()		// ½Ì±ÛÅæ »ý¼º
 				
 #define SAFE_DELETE(ptr)			\
-	if (_scene)						\
+	if (ptr)						\
 	{								\
-		delete _scene;				\
-		_scene = nullptr;			\
+		delete ptr;				\
+		ptr = nullptr;			\
 	}
