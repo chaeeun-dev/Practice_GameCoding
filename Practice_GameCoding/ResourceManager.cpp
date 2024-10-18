@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ResourceManager.h"
 #include "Texture.h"
+#include "Sprite.h"
 
 ResourceManager::~ResourceManager()
 {
@@ -41,3 +42,22 @@ Texture* ResourceManager::LoadTexture(const wstring& key, const wstring& path, u
 
 	return texture;
 }
+
+Sprite* ResourceManager::CreateSprite(const wstring& key, Texture* texture, int32 x, int32 y, int32 cx, int32 cy)
+{
+	// 만약 Sprite가 있으면 리턴해줌
+	if (_sprites.find(key) != _sprites.end())	// 못 찾으면 last 원소 반환, 즉 _sprites.end()가 아니라면 찾았다는 것
+		return _sprites[key];
+
+	// 값이 0이면 Default 값으로 설정
+	if (cx == 0)
+		cx = texture->GetSize().x;
+	if (cy == 0)
+		cy = texture->GetSize().y;
+
+	Sprite* sprite = new Sprite(texture, x, y, cx, cy);
+	_sprites[key] = sprite;
+
+	return sprite;
+}
+

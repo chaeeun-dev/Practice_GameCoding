@@ -11,6 +11,9 @@ public:
 	Texture* LoadBmp(HWND hwnd, const wstring& path);	// 이미지 파일 로드 함수
 	HDC GetDC();
 
+	void SetSize(Vec2Int size) { _size = size; }
+	Vec2Int GetSize() { return _size; }
+
 	void SetTransparent(uint32 transparent) { _transparent = transparent; }
 	uint32 GetTransparent() { return _transparent; }
 
