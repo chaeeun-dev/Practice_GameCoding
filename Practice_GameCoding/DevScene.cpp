@@ -5,6 +5,7 @@
 #include "TimeManager.h"
 #include "ResourceManager.h"
 #include "Texture.h"
+#include "Sprite.h"	
 
 DevScene::DevScene()
 {
@@ -16,6 +17,7 @@ DevScene::~DevScene()
 
 void DevScene::Init()
 {
+	// Texture Load
 	GET_SINGLE(ResourceManager)->LoadTexture(L"Stage01", L"Sprite\\Map\\Stage01.bmp");
 	GET_SINGLE(ResourceManager)->LoadTexture(L"Tile", L"Sprite\\Map\\Tile.bmp", RGB(128, 128, 128));
 	GET_SINGLE(ResourceManager)->LoadTexture(L"Sword", L"Sprite\\Item\\Sword.bmp");
@@ -28,6 +30,9 @@ void DevScene::Init()
 	GET_SINGLE(ResourceManager)->LoadTexture(L"Edit", L"Sprite\\UI\\Edit.bmp");
 	GET_SINGLE(ResourceManager)->LoadTexture(L"Exit", L"Sprite\\UI\\Exit.bmp");
 
+	// Create Sprite by Texture
+	Texture* tex = GET_SINGLE(ResourceManager)->GetTexture(L"Start");
+	GET_SINGLE(ResourceManager)->CreateSprite(L"Start_On", tex, 150, 0, 150, 150);
 }
 
 void DevScene::Update()
@@ -38,11 +43,19 @@ void DevScene::Update()
 void DevScene::Render(HDC hdc)
 {
 	Texture* tex = GET_SINGLE(ResourceManager)->GetTexture(L"Stage01");
+	Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Start_On");
 
 	::BitBlt(hdc,
 		0, 0,
 		GWinSizeX, GWinSizeY,
 		tex->GetDC(),
 		0, 0,
+		SRCCOPY);
+
+	::BitBlt(hdc,
+		0, 0,
+		GWinSizeX, GWinSizeY,
+		sprite->GetDC(),
+		sprite->GetPos().x, sprite->GetPos().y,
 		SRCCOPY);
 }
