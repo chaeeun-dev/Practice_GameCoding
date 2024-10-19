@@ -135,6 +135,9 @@
     <ClInclude Include="SpriteRenderer.h">
       <Filter>소스 파일\03.Objects\Unity</Filter>
     </ClInclude>
+    <ClInclude Include="Flipbook.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Practice_GameCoding.rc">
@@ -221,6 +224,9 @@
     </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>소스 파일\03.Objects\Unity</Filter>
+    </ClCompile>
+    <ClCompile Include="Flipbook.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
