@@ -43,14 +43,17 @@ void SpriteActor::Render(HDC hdc)
 		_sprite->GetSize().y,
 		_sprite->GetTransparent());*/
 
-	::BitBlt(hdc,
-		(int32)_pos.x - size.x / 2,
+	// BitBlt - 투명화 처리 안 됨 -> TransparentBlt로 투명화 처리!
+	::TransparentBlt(hdc,
+		(int32)_pos.x - size.x / 2,		// Actor의 중심
 		(int32)_pos.y - size.y / 2,
 		size.x,
 		size.y,
 		_sprite->GetDC(),
 		_sprite->GetPos().x,
 		_sprite->GetPos().y,
-		SRCCOPY);
+		_sprite->GetSize().x,
+		_sprite->GetSize().y,
+		RGB(255, 255, 255));
 }
 
