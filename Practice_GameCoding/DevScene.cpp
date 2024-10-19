@@ -6,6 +6,8 @@
 #include "ResourceManager.h"
 #include "Texture.h"
 #include "Sprite.h"	
+#include "Actor.h"
+#include "SpriteActor.h"
 
 DevScene::DevScene()
 {
@@ -30,32 +32,26 @@ void DevScene::Init()
 	GET_SINGLE(ResourceManager)->LoadTexture(L"Edit", L"Sprite\\UI\\Edit.bmp");
 	GET_SINGLE(ResourceManager)->LoadTexture(L"Exit", L"Sprite\\UI\\Exit.bmp");
 
-	// Create Sprite by Texture
-	Texture* tex = GET_SINGLE(ResourceManager)->GetTexture(L"Start");
-	GET_SINGLE(ResourceManager)->CreateSprite(L"Start_On", tex, 150, 0, 150, 150);
+	// background
+	{
+		Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Stage01");
+
+		SpriteActor* background = new SpriteActor();
+		background->SetSprite(sprite);
+		background->SetPos(Vec2(0, 0));
+
+		_background = background;
+	}
+
 }
 
 void DevScene::Update()
 {
-
+	float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();
+	_background->Tick();
 }
 
 void DevScene::Render(HDC hdc)
 {
-	Texture* tex = GET_SINGLE(ResourceManager)->GetTexture(L"Stage01");
-	Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Start_On");
-
-	::BitBlt(hdc,
-		0, 0,
-		GWinSizeX, GWinSizeY,
-		tex->GetDC(),
-		0, 0,
-		SRCCOPY);
-
-	::BitBlt(hdc,
-		0, 0,
-		GWinSizeX, GWinSizeY,
-		sprite->GetDC(),
-		sprite->GetPos().x, sprite->GetPos().y,
-		SRCCOPY);
+	_background->Render(hdc);
 }

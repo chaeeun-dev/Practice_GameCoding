@@ -193,10 +193,10 @@
       <Filter>소스 파일\04.Resources</Filter>
     </ClCompile>
     <ClCompile Include="Actor.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\03.Objects</Filter>
     </ClCompile>
     <ClCompile Include="SpriteActor.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\03.Objects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
