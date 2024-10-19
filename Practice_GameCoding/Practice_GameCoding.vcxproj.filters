@@ -132,6 +132,9 @@
     <ClInclude Include="SpriteActor.h">
       <Filter>소스 파일\03.Objects</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>소스 파일\03.Objects\Unity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Practice_GameCoding.rc">
@@ -214,6 +217,9 @@
       <Filter>소스 파일\03.Objects\Unity</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
+      <Filter>소스 파일\03.Objects\Unity</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
       <Filter>소스 파일\03.Objects\Unity</Filter>
     </ClCompile>
   </ItemGroup>
