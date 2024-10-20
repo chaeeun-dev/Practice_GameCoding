@@ -18,5 +18,11 @@ private:
 	class Scene* _scene;	// 현재 실행하고 있는 scene
 	SceneType _sceneType = SceneType::None;
 
+public:
+	Vec2 GetCameraPos() { return _cameraPos; }
+	void SetCameraPos(Vec2 pos) { _cameraPos = pos; }
+
+private:
+	Vec2 _cameraPos = { 400, 300 };
 };
 

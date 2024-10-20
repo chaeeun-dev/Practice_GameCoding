@@ -1,5 +1,7 @@
 #pragma once
 
+class Component;
+
 class Actor
 {
 public:
@@ -13,8 +15,13 @@ public:
 	void SetPos(Vec2 pos) { _pos = pos; }
 	Vec2 GetPos() { return _pos; }
 
+	void AddComponent(Component* component);
+	void RemoveComponent(Component* component);
+
 protected:
 	Vec2 _pos = { 0, 0 };
 	// Sprite는 따로 SpriteActor를 생성해서 관리함!
+
+	vector<Component*> _components;
 };
 

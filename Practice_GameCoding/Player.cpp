@@ -3,6 +3,7 @@
 #include "TimeManager.h"
 #include "InputManager.h"
 #include "ResourceManager.h"
+#include "CameraComponent.h"
 
 
 Player::Player()
@@ -11,6 +12,10 @@ Player::Player()
 	_flipbookDown = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_MoveDown");
 	_flipbookLeft = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_MoveLeft");
 	_flipbookRight = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_MoveRight");
+
+	// Camera ∫Ÿ¿Ã±‚
+	CameraComponent* camera = new CameraComponent();
+	AddComponent(camera);
 }
 
 Player::~Player()

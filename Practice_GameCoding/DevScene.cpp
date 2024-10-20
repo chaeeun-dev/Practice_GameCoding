@@ -52,7 +52,8 @@ void DevScene::Init()
 
 		SpriteActor* background = new SpriteActor();
 		background->SetSprite(sprite);
-		background->SetPos(Vec2(0, 0));
+		const Vec2Int size = sprite->GetSize();
+		background->SetPos(Vec2(size.x / 2, size.y / 2));
 
 		_actors.push_back(background);
 	}
