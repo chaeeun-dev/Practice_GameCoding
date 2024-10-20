@@ -15,13 +15,18 @@ public:
 	void SetPos(Vec2 pos) { _pos = pos; }
 	Vec2 GetPos() { return _pos; }
 
+	// Camera Component
 	void AddComponent(Component* component);
 	void RemoveComponent(Component* component);
 
-protected:
-	Vec2 _pos = { 0, 0 };
-	// Sprite는 따로 SpriteActor를 생성해서 관리함!
+	// Layer
+	void SetLayer(LAYER_TYPE layer) { _layer = layer; }
+	LAYER_TYPE GetLayer() { return _layer; }
 
-	vector<Component*> _components;
+protected:
+	// Sprite는 따로 SpriteActor를 생성해서 관리함!
+	Vec2 _pos = { 0, 0 };
+	vector<Component*> _components;		// Camera Component
+	LAYER_TYPE _layer = LAYER_OBJECT;	// Layer
 };
 

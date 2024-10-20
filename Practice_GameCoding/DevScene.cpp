@@ -18,6 +18,15 @@ DevScene::DevScene()
 
 DevScene::~DevScene()
 {
+	for (const vector<Actor*>& actors : _actors)
+	{
+		for (Actor* actor : actors)
+		{
+			SAFE_DELETE(actor);
+		}
+	}
+
+	_actors->clear();
 }
 
 void DevScene::Init()
@@ -46,17 +55,7 @@ void DevScene::Init()
 	GET_SINGLE(ResourceManager)->CreateSprite(L"Exit_Off", GET_SINGLE(ResourceManager)->GetTexture(L"Exit"), 0, 0, 150, 150);
 	GET_SINGLE(ResourceManager)->CreateSprite(L"Exit_On", GET_SINGLE(ResourceManager)->GetTexture(L"Exit"), 150, 0, 150, 150);
 
-	// background
-	{
-		Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Stage01");
 
-		SpriteActor* background = new SpriteActor();
-		background->SetSprite(sprite);
-		const Vec2Int size = sprite->GetSize();
-		background->SetPos(Vec2(size.x / 2, size.y / 2));
-
-		_actors.push_back(background);
-	}
 
 	// animation
 	{
@@ -80,10 +79,32 @@ void DevScene::Init()
 		fb->SetInfo({ texture, L"FB_MoveRight", {200, 200}, 0, 9, 1, 0.5f });
 	}
 
+	// background
+	{
+		Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Stage01");
+
+		SpriteActor* background = new SpriteActor();
+		background->SetSprite(sprite);
+		background->SetLayer(LAYER_BACKGROUND);
+		const Vec2Int size = sprite->GetSize();
+		background->SetPos(Vec2(size.x / 2, size.y / 2));
+
+		AddActor(background);
+	}
+
 	// player
 	{
 		Player* player = new Player();
-		_actors.push_back(player);
+		player->SetLayer(LAYER_OBJECT);
+		AddActor(player);
+	}
+
+	for (const vector<Actor*>& actors : _actors)
+	{
+		for (Actor* actor : actors)
+		{
+			actor->BeginPlay();
+		}
 	}
 
 }
@@ -92,12 +113,39 @@ void DevScene::Update()
 {
 	float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();
 	
-	for (auto actor : _actors)
-		actor->Tick();
+	for (const vector<Actor*>& actors : _actors)
+	{
+		for (Actor* actor : actors)
+		{
+			actor->Tick();
+		}
+	}
 }
 
 void DevScene::Render(HDC hdc)
 {
-	for (auto actor : _actors)
-		actor->Render(hdc);
+	for (const vector<Actor*>& actors : _actors)
+	{
+		for (Actor* actor : actors)
+		{
+			actor->Render(hdc);
+		}
+	}
+}
+
+void DevScene::AddActor(Actor* actor)
+{
+	if (actor == nullptr)
+		return;
+
+	_actors[actor->GetLayer()].push_back(actor);
+}
+
+void DevScene::RemoveActor(Actor* actor)
+{
+	if (actor == nullptr)
+		return;
+
+	vector<Actor*>& v = _actors[actor->GetLayer()];
+	v.erase(std::remove(v.begin(), v.end(), actor), v.end());
 }
