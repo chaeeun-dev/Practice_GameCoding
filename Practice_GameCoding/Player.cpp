@@ -2,56 +2,57 @@
 #include "Player.h"
 #include "TimeManager.h"
 #include "InputManager.h"
-#include "Utils.h"
+#include "ResourceManager.h"
 
-Player::Player() : Object(ObjectType::Player)
+
+Player::Player()
 {
+	_flipbookUp = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_MoveUp");
+	_flipbookDown = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_MoveDown");
+	_flipbookLeft = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_MoveLeft");
+	_flipbookRight = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_MoveRight");
 }
 
 Player::~Player()
 {
 }
 
-void Player::Init()
+void Player::BeginPlay()
 {
-	// 데이터 시트 (대부분 기획자과 관리) 
-	_stat.hp = 100;
-	_stat.maxHp = 100;
-	_stat.speed = 500;
+	Super::BeginPlay();
 
-	_pos.x = 400;
-	_pos.y = 500;
+	SetFlipbook(_flipbookRight);	// 처음 세팅
 }
 
-void Player::Update()
+void Player::Tick()
 {
+	Super::Tick();
+
 	float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();
 
 	if (GET_SINGLE(InputManager)->GetButton(KeyType::A))
 	{
-		_pos.x -= _stat.speed * deltaTime;
+		_pos.x -= 200 * deltaTime;
+		SetFlipbook(_flipbookLeft);
 	}
 	if (GET_SINGLE(InputManager)->GetButton(KeyType::D))
 	{
-		_pos.x += _stat.speed * deltaTime;
+		_pos.x += 200 * deltaTime;
+		SetFlipbook(_flipbookRight);
 	}
 	if (GET_SINGLE(InputManager)->GetButton(KeyType::W))
 	{
-		_pos.y -= _stat.speed * deltaTime;
+		_pos.y -= 200 * deltaTime;
+		SetFlipbook(_flipbookUp);
 	}
 	if (GET_SINGLE(InputManager)->GetButton(KeyType::S))
 	{
-		_pos.y += _stat.speed * deltaTime;
-	}
-
-	// 미사일 발사(스페이스바 누르면0
-	if (GET_SINGLE(InputManager)->GetButtonDown(KeyType::Spacebar))
-	{
-		// 미사일 발사
+		_pos.y += 200 * deltaTime;
+		SetFlipbook(_flipbookDown);
 	}
 }
 
 void Player::Render(HDC hdc)
 {
-	Utils::DrawCircle(hdc, _pos, 50);
+	Super::Render(hdc);
 }

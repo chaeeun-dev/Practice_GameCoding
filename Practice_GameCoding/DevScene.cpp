@@ -8,6 +8,9 @@
 #include "Sprite.h"	
 #include "Actor.h"
 #include "SpriteActor.h"
+#include "Flipbook.h"
+#include "FlipbookActor.h"
+#include "Player.h"
 
 DevScene::DevScene()
 {
@@ -43,7 +46,6 @@ void DevScene::Init()
 	GET_SINGLE(ResourceManager)->CreateSprite(L"Exit_Off", GET_SINGLE(ResourceManager)->GetTexture(L"Exit"), 0, 0, 150, 150);
 	GET_SINGLE(ResourceManager)->CreateSprite(L"Exit_On", GET_SINGLE(ResourceManager)->GetTexture(L"Exit"), 150, 0, 150, 150);
 
-
 	// background
 	{
 		Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Stage01");
@@ -52,7 +54,35 @@ void DevScene::Init()
 		background->SetSprite(sprite);
 		background->SetPos(Vec2(0, 0));
 
-		_background = background;
+		_actors.push_back(background);
+	}
+
+	// animation
+	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerUp");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_MoveUp");
+		fb->SetInfo({ texture, L"FB_MoveUp", {200, 200}, 0, 9, 1, 0.5f });
+	}
+	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerDown");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_MoveDown");
+		fb->SetInfo({ texture, L"FB_MoveDown", {200, 200}, 0, 9, 1, 0.5f });
+	}
+	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerLeft");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_MoveLeft");
+		fb->SetInfo({ texture, L"FB_MoveLeft", {200, 200}, 0, 9, 1, 0.5f });
+	}
+	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerRight");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_MoveRight");
+		fb->SetInfo({ texture, L"FB_MoveRight", {200, 200}, 0, 9, 1, 0.5f });
+	}
+
+	// player
+	{
+		Player* player = new Player();
+		_actors.push_back(player);
 	}
 
 }
@@ -60,10 +90,13 @@ void DevScene::Init()
 void DevScene::Update()
 {
 	float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();
-	_background->Tick();
+	
+	for (auto actor : _actors)
+		actor->Tick();
 }
 
 void DevScene::Render(HDC hdc)
 {
-	_background->Render(hdc);
+	for (auto actor : _actors)
+		actor->Render(hdc);
 }
