@@ -21,12 +21,6 @@ struct Stat
 	float speed = 0;
 };
 
-struct Pos
-{
-	float x = 0;
-	float y = 0;
-};
-
 struct Vector
 {
 	Vector() {}
@@ -184,8 +178,7 @@ struct VectorInt
 };
 
 
-// using Pos = Vector;
-
+using Pos = Vector;
 // vector 자료형과 헷갈리기 때문에 Vec2로 바꿈
 using Vec2 = Vector;
 using Vec2Int = VectorInt;

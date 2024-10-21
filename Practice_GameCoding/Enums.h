@@ -15,3 +15,9 @@ enum LAYER_TYPE
 
 	LAYER_MAXCOUNT
 };
+
+enum ColliderType
+{
+	Box, 
+	Sphere,
+};
